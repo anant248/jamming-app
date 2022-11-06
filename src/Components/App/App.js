@@ -20,10 +20,11 @@ class App extends React.Component {
                        {name: 'playlistName3', artist: 'playlistArtist3', album: 'playlistAlbum3', id: 6}]
     };
 
-    // bind the current value of this to methods: addTrack, removeTrack and updatePlaylistName
+    // bind the current value of this to methods: addTrack, removeTrack, updatePlaylistName, savePlaylist
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
+    this.savePlaylist = this.savePlaylist.bind(this);
     
   }
 
@@ -50,6 +51,10 @@ class App extends React.Component {
     this.setState({playlistName: name});
   }
 
+  savePlaylist() {
+    const trackUris = this.state.playlistTracks.map(track => track.uri);
+  }
+
   render() {
     return (
       <div>
@@ -59,7 +64,7 @@ class App extends React.Component {
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}/>
             <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onRemove={this.removeTrack}
-                      onNameChange={this.updatePlaylistName}/>
+                      onNameChange={this.updatePlaylistName} onSave={this.savePlaylist}/>
           </div>
         </div>
       </div>
